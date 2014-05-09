@@ -122,6 +122,10 @@ class BWTable(gtk.Table, BWBox):
 
         self.resize(rows, columns)
 
+    def bw_attach_next_noexpand_nofill(self, child):
+        """
+        """
+        self.bw_attach_next(child, 0, 0)
 
     def bw_attach_next(self,
                        child,
