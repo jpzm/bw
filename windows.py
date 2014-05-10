@@ -19,7 +19,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import gtk
-from bestwidgets import gtk_version_minor
+from bw import gtk_version_minor
 
 PRIMARY_TEXT_MARKUP = '<span weight="bold" size="larger">%s</span>'
 

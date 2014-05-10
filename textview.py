@@ -21,7 +21,7 @@
 import gtk
 import gobject
 
-import bestwidgets as bw
+import bw
 
 
 

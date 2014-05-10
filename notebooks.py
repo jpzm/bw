@@ -19,22 +19,23 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import gtk
-import gtk.gdk as gdk
 
-gtk_version_major, gtk_version_minor, gtk_version_release = gtk.gtk_version
 
-from boxes import BWHBox, BWVBox, BWTable, BWStatusbar, BWScrolledWindow
-from buttons import BWStockButton, BWToggleStockButton
-from comboboxes import BWChangeableComboBoxEntry
-from expanders import BWExpander
-from frames import BWFrame
-from notebooks import BWNotebook
-from labels import BWLabel, BWSectionLabel
-from textview import BWTextView, BWTextEditor
-from windows import BWWindow, BWMainWindow, BWAlertDialog
 
-def update_gui():
+class BWNotebook(gtk.Notebook):
     """
     """
-    while (gtk.events_pending() or gdk.events_pending()):
-        gtk.main_iteration_do(True)
+    def __init__(self, label=""):
+        """
+        """
+        gtk.Notebook.__init__(self)
+        self.set_border_width(3)
+        self.__alignment = []
+
+    def bw_append_page(self, widget, label):
+        """
+        """
+        self.__alignment.append(gtk.Alignment(0, 0, 1, 1))
+        self.__alignment[-1].set_padding(12, 0, 24, 0)
+        self.__alignment[-1].add(widget)
+        self.append_page(self.__alignment[-1], label)
