@@ -19,7 +19,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import gtk
-import bw
+
+from labels import BWSectionLabel
 
 
 class BWExpander(gtk.Expander):
@@ -30,7 +31,7 @@ class BWExpander(gtk.Expander):
         """
         gtk.Expander.__init__(self)
 
-        self.__label = bw.BWSectionLabel(label)
+        self.__label = BWSectionLabel(label)
         self.set_label_widget(self.__label)
 
         self.__alignment = gtk.Alignment(0, 0, 1, 1)

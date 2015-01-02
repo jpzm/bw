@@ -21,17 +21,16 @@
 import gtk
 import gobject
 
-import bw
+from boxes import BWScrolledWindow, BWHBox
 
 
-
-class BWTextView(bw.BWScrolledWindow):
+class BWTextView(BWScrolledWindow):
     """
     """
     def __init__(self):
         """
         """
-        bw.BWScrolledWindow.__init__(self)
+        BWScrolledWindow.__init__(self)
 
         self.__scroll = False
 
@@ -75,7 +74,7 @@ class BWTextView(bw.BWScrolledWindow):
             if f_before_scroll:
                 f_before_scroll()
 
-            bw.update_gui()
+            bw_update_gui()
 
             value  = self.get_vadjustment().upper
             value -= self.get_vadjustment().page_size
@@ -110,13 +109,13 @@ class BWTextView(bw.BWScrolledWindow):
 
 
 
-class BWTextEditor(bw.BWScrolledWindow):
+class BWTextEditor(BWScrolledWindow):
     """
     """
     def __init__(self):
         """
         """
-        bw.BWScrolledWindow.__init__(self)
+        BWScrolledWindow.__init__(self)
         self.connect('expose_event', self.__expose)
 
         self.__scroll = False
@@ -127,7 +126,7 @@ class BWTextEditor(bw.BWScrolledWindow):
     def __create_widgets(self):
         """
         """
-        self.__hbox = bw.BWHBox(spacing=6)
+        self.__hbox = BWHBox(spacing=6)
 
         self.__textbuffer = gtk.TextBuffer()
         self.__textview = gtk.TextView(self.__textbuffer)
@@ -188,7 +187,7 @@ class BWTextEditor(bw.BWScrolledWindow):
                 if f_before_scroll:
                     f_before_scroll()
 
-                bw.update_gui()
+                bw_update_gui()
 
                 value  = self.get_vadjustment().upper
                 value -= self.get_vadjustment().page_size
