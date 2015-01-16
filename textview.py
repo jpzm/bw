@@ -22,6 +22,7 @@ import gtk
 import gobject
 
 from boxes import BWScrolledWindow, BWHBox
+from common import update_gui
 
 
 class BWTextView(BWScrolledWindow):
@@ -74,7 +75,7 @@ class BWTextView(BWScrolledWindow):
             if f_before_scroll:
                 f_before_scroll()
 
-            bw_update_gui()
+            update_gui()
 
             value  = self.get_vadjustment().upper
             value -= self.get_vadjustment().page_size
@@ -187,7 +188,7 @@ class BWTextEditor(BWScrolledWindow):
                 if f_before_scroll:
                     f_before_scroll()
 
-                bw_update_gui()
+                update_gui()
 
                 value  = self.get_vadjustment().upper
                 value -= self.get_vadjustment().page_size

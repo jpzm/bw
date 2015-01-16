@@ -1,6 +1,6 @@
 # vim: set fileencoding=utf-8 :
 
-# Copyright (C) 2008 Joao Paulo de Souza Medeiros
+# Copyright (C) 2015 Joao Paulo de Souza Medeiros
 #
 # Author(s): Joao Paulo de Souza Medeiros <ignotus21@gmail.com>
 #
@@ -18,12 +18,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-from boxes import BWHBox, BWVBox, BWTable, BWStatusbar, BWScrolledWindow
-from buttons import BWStockButton, BWToggleStockButton
-from comboboxes import BWChangeableComboBoxEntry
-from expanders import BWExpander
-from frames import BWFrame
-from notebooks import BWNotebook
-from labels import BWLabel, BWSectionLabel
-from textview import BWTextView, BWTextEditor
-from windows import BWWindow, BWMainWindow, BWAlertDialog
+import gtk
+import gtk.gdk as gdk
+
+gtk_version_major, gtk_version_minor, gtk_version_release = gtk.gtk_version
+
+def update_gui():
+    """
+    """
+    while (gtk.events_pending() or gdk.events_pending()):
+        gtk.main_iteration_do(True)
