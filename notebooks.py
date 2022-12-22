@@ -18,24 +18,34 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-import gtk
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
 
 
 
-class BWNotebook(gtk.Notebook):
+class BWNotebook(Gtk.Notebook):
     """
     """
     def __init__(self, label=""):
         """
         """
-        gtk.Notebook.__init__(self)
+        Gtk.Notebook.__init__(self)
         self.set_border_width(3)
         self.__alignment = []
+
+    def __del__(self):
+        """
+        """
+        page = self.get_current_page()
+        while page > -1:
+            self.remove_page(page)
+            page = self.get_current_page()
 
     def bw_append_page(self, widget, label):
         """
         """
-        self.__alignment.append(gtk.Alignment(0, 0, 1, 1))
+        self.__alignment.append(Gtk.Alignment(0, 0, 1, 1))
         self.__alignment[-1].set_padding(12, 0, 24, 0)
         self.__alignment[-1].add(widget)
         self.append_page(self.__alignment[-1], label)

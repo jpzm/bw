@@ -18,21 +18,23 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-import gtk
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
 
 PRIMARY_TEXT_MARKUP = '<span weight="bold" size="larger">%s</span>'
 
 
 
-class BWAlertDialog(gtk.MessageDialog):
+class BWAlertDialog(Gtk.MessageDialog):
     """
     """
-    def __init__(self, parent=None, flags=0, type=gtk.MESSAGE_INFO,
-                 buttons=gtk.BUTTONS_OK,
+    def __init__(self, parent=None, flags=0, type=Gtk.MessageType.INFO,
+                 buttons=Gtk.ButtonsType.OK,
                  primary_text=None,
                  secondary_text=None):
         
-        gtk.MessageDialog.__init__(self, parent, flags, type, buttons)
+        Gtk.MessageDialog.__init__(self, parent, flags, type, buttons)
 
         self.connect('response', self.__destroy)
 
@@ -54,14 +56,14 @@ class BWAlertDialog(gtk.MessageDialog):
 
 
 
-class BWWindow(gtk.Window):
+class BWWindow(Gtk.Window):
     """
     """
-    def __init__(self, type=gtk.WINDOW_TOPLEVEL):
+    def __init__(self, type=Gtk.WindowType.TOPLEVEL):
         """
         """
-        gtk.Window.__init__(self, type)
+        Gtk.Window.__init__(self, type)
         self.set_border_width(5)
 
 
-BWMainWindow = gtk.Window
+BWMainWindow = Gtk.Window

@@ -18,12 +18,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-from boxes import BWHBox, BWVBox, BWTable, BWStatusbar, BWScrolledWindow
-from buttons import BWStockButton, BWToggleStockButton
-from comboboxes import BWChangeableComboBoxEntry
-from expanders import BWExpander
-from frames import BWFrame
-from notebooks import BWNotebook
-from labels import BWLabel, BWSectionLabel
-from textview import BWTextView, BWTextEditor
-from windows import BWWindow, BWMainWindow, BWAlertDialog
+from bestwidgets.boxes import BWHBox, BWVBox, BWTable, BWStatusbar, BWScrolledWindow
+from bestwidgets.buttons import BWStockButton, BWToggleStockButton
+from bestwidgets.comboboxes import BWChangeableComboBoxEntry
+from bestwidgets.expanders import BWExpander
+from bestwidgets.frames import BWFrame
+from bestwidgets.notebooks import BWNotebook
+from bestwidgets.labels import BWLabel, BWSectionLabel
+from bestwidgets.textview import BWTextView, BWTextEditor
+from bestwidgets.windows import BWWindow, BWMainWindow, BWAlertDialog

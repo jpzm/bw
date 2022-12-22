@@ -18,20 +18,22 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-import gtk
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
 import gobject
 
 
 
-class BWChangeableComboBoxEntry(gtk.ComboBoxEntry):
+class BWChangeableComboBoxEntry(Gtk.Entry):
     """
     """
     def __init__(self):
         """
         """
-        self.__liststore = gtk.ListStore(gobject.TYPE_STRING)
+        self.__liststore = Gtk.ListStore(gobject.TYPE_STRING)
 
-        gtk.ComboBoxEntry.__init__(self, self.__liststore, 0)
+        Gtk.ComboBoxEntry.__init__(self, self.__liststore, 0)
 
         self.connect("changed", self.__changed)
         self.get_child().connect("changed", self.__entry_changed)
@@ -81,16 +83,16 @@ if __name__ == "__main__":
         combo.append_text('New')
 
 
-    window = gtk.Window()
-    window.connect("destroy", lambda w: gtk.main_quit())
+    window = Gtk.Window()
+    window.connect("destroy", lambda w: Gtk.main_quit())
 
-    box = gtk.HBox()
+    box = Gtk.HBox()
 
     combo = BWChangeableComboBoxEntry()
     combo.append_text('New')
     combo.set_active(0)
 
-    button = gtk.Button('More')
+    button = Gtk.Button('More')
     button.connect("clicked", button_clicked, combo)
 
     box.pack_start(button, False, False)
@@ -99,4 +101,4 @@ if __name__ == "__main__":
     window.add(box)
     window.show_all()
 
-    gtk.main()
+    Gtk.main()

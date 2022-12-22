@@ -18,11 +18,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-import gtk
+import gi
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
 import gobject
 
-from boxes import BWScrolledWindow, BWHBox
-from common import update_gui
+from bestwidgets.boxes import BWScrolledWindow, BWHBox
+from bestwidgets.common import update_gui
 
 
 class BWTextView(BWScrolledWindow):
@@ -41,8 +43,10 @@ class BWTextView(BWScrolledWindow):
     def __create_widgets(self):
         """
         """
-        self.__textbuffer = gtk.TextBuffer()
-        self.__textview = gtk.TextView(self.__textbuffer)
+        self.__textbuffer = Gtk.TextBuffer()
+        #self.__textview = Gtk.TextView(self.__textbuffer)
+        self.__textview = Gtk.TextView()
+        self.__textview.set_buffer(self.__textbuffer)
 
         self.add_with_viewport(self.__textview)
 
@@ -77,8 +81,8 @@ class BWTextView(BWScrolledWindow):
 
             update_gui()
 
-            value  = self.get_vadjustment().upper
-            value -= self.get_vadjustment().page_size
+            value  = self.get_vadjustment().get_upper()
+            value -= self.get_vadjustment().get_page_size()
 
             self.get_vadjustment().set_value(value)
 
@@ -93,7 +97,8 @@ class BWTextView(BWScrolledWindow):
         """
         """
         return self.__textbuffer.get_text(self.__textbuffer.get_start_iter(),
-                                          self.__textbuffer.get_end_iter())
+                                          self.__textbuffer.get_end_iter(),
+                                          True)
 
 
     def bw_get_textbuffer(self):
@@ -117,7 +122,7 @@ class BWTextEditor(BWScrolledWindow):
         """
         """
         BWScrolledWindow.__init__(self)
-        self.connect('expose_event', self.__expose)
+        self.connect('draw', self.__expose)
 
         self.__scroll = False
 
@@ -129,12 +134,14 @@ class BWTextEditor(BWScrolledWindow):
         """
         self.__hbox = BWHBox(spacing=6)
 
-        self.__textbuffer = gtk.TextBuffer()
-        self.__textview = gtk.TextView(self.__textbuffer)
+        self.__textbuffer = Gtk.TextBuffer()
+        self.__textview = Gtk.TextView()
+        self.__textview.set_buffer(self.__textbuffer)
 
-        self.__linebuffer = gtk.TextBuffer()
-        self.__lineview = gtk.TextView(self.__linebuffer)
-        self.__lineview.set_justification(gtk.JUSTIFY_RIGHT)
+        self.__linebuffer = Gtk.TextBuffer()
+        self.__lineview = Gtk.TextView()
+        self.__lineview.set_buffer(self.__linebuffer)
+        self.__lineview.set_justification(Gtk.Justification.RIGHT)
         self.__lineview.set_editable(False)
         self.__lineview.set_sensitive(False)
 
@@ -144,7 +151,7 @@ class BWTextEditor(BWScrolledWindow):
         self.add_with_viewport(self.__hbox)
 
 
-    def __expose(self, widget, event):
+    def __expose(self, widget, context):
         """
         """
         # code to fix a gtk issue that don't show text correctly
@@ -190,8 +197,8 @@ class BWTextEditor(BWScrolledWindow):
 
                 update_gui()
 
-                value  = self.get_vadjustment().upper
-                value -= self.get_vadjustment().page_size
+                value  = self.get_vadjustment().get_upper()
+                value -= self.get_vadjustment().get_page_size()
 
                 self.get_vadjustment().set_value(value)
 
